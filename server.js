@@ -10,7 +10,7 @@ const http = require("http");
 
 
 
-mongoose.connect('mongodb://127.0.0.1/chatDb', {useNewUrlParser: true, useUnifiedTopology:true})
+mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology:true})
 .then(()=>{
     console.log("mongo connection is open!");
 })
@@ -40,5 +40,5 @@ const { io } = require('./routes/socket')(server);
 
 
 server.listen(process.env.PORT, ()=>{
-    console.log("running server on 5000...")
+    console.log("running server...")
 });
