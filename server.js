@@ -20,7 +20,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUn
 
 
 app.use(cors({
-    origin: '*',
+    origin: 'https://chat-project-6mzh4qun6-assaf3434-gmailcom.vercel.app',
 }))
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
