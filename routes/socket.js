@@ -11,7 +11,7 @@ const { UpdateUnreadMassagesCounterAsync, UpdateMassageToDbAsync } = require("..
 // Export the function that creates the io object
 module.exports = (server) => {
   const io = new Server(server, {
-    cors: "http://localhost:3000",
+    cors: "*",
     methods: ["POST", "GET"],
   });
 

@@ -20,7 +20,7 @@ mongoose.connect('mongodb://127.0.0.1/chatDb', {useNewUrlParser: true, useUnifie
 
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: '*',
 }))
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
