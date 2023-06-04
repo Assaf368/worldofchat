@@ -39,6 +39,6 @@ const { io } = require('./routes/socket')(server);
 
 
 
-server.listen(5000, ()=>{
+server.listen(process.env.PORT, ()=>{
     console.log("running server on 5000...")
 });
