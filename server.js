@@ -20,20 +20,22 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUn
 
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Origin", "https://worldofchat.herokuapp.com/");
     res.header(
       "Access-Control-Allow-Headers",
-      "Origin, X-Requested, Content-Type, Accept Authorization"
-    )
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
     if (req.method === "OPTIONS") {
       res.header(
         "Access-Control-Allow-Methods",
         "POST, PUT, PATCH, GET, DELETE"
-      )
-      return res.status(200).json({})
+      );
+      return res.status(200).json({});
     }
-    next()
-  })
+    next();
+  });
+
+  
 
 app.use('/uploads',express.static('uploads'));
 
