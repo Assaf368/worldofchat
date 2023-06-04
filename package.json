@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=dev node server",
-    "dev": "cross-env NODE_ENV=dev nodemon server"
+    "start": "NODE_ENV=dev node server",
+    "dev": "NODE_ENV=dev nodemon server"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +23,6 @@
     "socket.io": "^4.6.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3",
     "nodemon": "^2.0.21"
   }
 }
