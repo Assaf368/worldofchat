@@ -24,7 +24,7 @@ app.use(cors({
 }))
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
-app.options('/api', cors({
+app.options('*', cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET', 'POST']
   }));
