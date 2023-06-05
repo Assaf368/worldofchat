@@ -20,7 +20,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUn
 
 
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://chat-project-6mzh4qun6-assaf3434-gmailcom.vercel.app');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     next();
