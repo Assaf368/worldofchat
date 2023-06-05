@@ -19,15 +19,8 @@ mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUn
 })
 
 
-app.use(cors({
-    origin: '*',
-}))
-app.use(bodyParser.urlencoded({extended:false}))
-app.use(bodyParser.json())
-app.options('*', cors({
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST']
-  }));
+app.use(cors());
+
 
 app.use('/uploads',express.static('uploads'));
 
