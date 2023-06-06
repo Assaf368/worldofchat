@@ -196,6 +196,7 @@ router.get("/api/home", authenticateToken, async (req, res) => {
     status: user.status,
     img:user.image
   });
+  return res.status(200);
 });
 
 router.get('/api/home/friendsdata',async(req,res) =>{
