@@ -103,9 +103,9 @@ const _GetPreviewGroupsAsync = async (user) => {
       const upload_stream = cloudinary.uploader.upload_stream(
         {
           folder: "images",
-          cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-          api_key: process.env.CLOUDINARY_API_KEY,
-          api_secret: process.env.CLOUDINARY_API_SECRET,
+          cloud_name: 'de8l6juge',
+          api_key: '653933767978122',
+          api_secret: 'zNopyXPOhKbBSlLXqIAaMNxEWSs',
           secure: true
         },
          function (error, result) {
