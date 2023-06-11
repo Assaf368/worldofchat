@@ -34,11 +34,8 @@ const UpdateUserStatusAsync = async (username, status) => {
 
 const UpdateUserImgAsync = async (username, img) => {
   const user = await GetUserAsync(username);
-  if (user.img) {
-    DeleteImgFromStorage(user.image);
-  }
   user.image = img;
-  user.save();
+  await user.save();
 };
 
 const CheckIfUserExist = async (username) => {

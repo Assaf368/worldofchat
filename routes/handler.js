@@ -16,14 +16,7 @@ const { ResetUnreadMassagesCounterAsync, UpdateUnreadMassagesCounterAsync } = re
 const { FindUserFriendsAsync, GetUserInvitationsAsync, CheckFriendshipStatusAsync } = require("../DataBaseFuncs/FriendFunctions");
 
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'uploads/'); // Set the upload folder path
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Set the filename to be the current date + file extension
-  }
-});
+const storage = multer.memoryStorage();
  const upload = multer({ storage: storage });
 
 
@@ -70,15 +63,15 @@ router.post("/api/register", async (req, res) => {
 
 router.post('/api/home/updateprofile',upload.single('image'), async(req,res)=>{
   const{username,status} = req.body;
-  let img = null;
+  let imgUrl = null;
   if(req.file){
-     img = req.file.path;
+    imgUrl = await UploadImgToCloud(req.file.buffer);
   }
   if(status !== ''){
     await UpdateUserStatusAsync(username,status);
   }
-  if(img){
-    await UpdateUserImgAsync(username, img);
+  if(imgUrl){
+    await UpdateUserImgAsync(username, imgUrl);
   }
 })
 
@@ -145,12 +138,11 @@ router.post('/api/home/createroom',upload.single('image'), async (req,res)=>{
   usernamesArray = usernames
   if(!Array.isArray(usernames))
     usernamesArray = usernames.split(',');
-  let img = null;
+  let imgUrl = null;
   if(req.file)
-    img = req.file.path;
-  
+     imgUrl = await UploadImgToCloud(req.file.buffer);
       if(usernames.length !== 2){
-          await CreateRoomAsync(usernamesArray,groupName,desc,img);
+          await CreateRoomAsync(usernamesArray,groupName,desc,imgUrl);
       }else{
           await CreatePrivateRoomAsync(usernamesArray,groupName);
       }
@@ -204,7 +196,7 @@ router.get('/api/home/friendsdata',async(req,res) =>{
   const friends = await FindUserFriendsAsync(userName);
   const roomsForShow = await FindPreviewGroupsForUserAsync(userName);
   roomsForShow.forEach((room)=>{
-    room.img = `${process.env.API_URL}${room.img}`
+    room.img = room.img
   })
   const invitations =  await GetUserInvitationsAsync(userName);
   const data = {
@@ -221,7 +213,7 @@ router.get('/api/home/getfullchat', async(req,res)=>{
   if(chat.members.length === 2){
     await AssignImgToPrivateChat(chat,target);
   }
-  chat.img = `http://localhost:5000/${chat.img}`
+  chat.img = chat.img
   const data = {
     chat : chat
   }
