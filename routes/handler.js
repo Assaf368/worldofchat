@@ -11,7 +11,7 @@ const multer = require('multer');
 const path = require('path');
 const { UsernameServerVallidation, PasswordServerVallidation } = require("../DataBaseFuncs/VallidationFunctions");
 const { UpdateUserStatusAsync, UpdateUserImgAsync, GetUserAsync, CheckIfUserExist } = require("../DataBaseFuncs/UserFunctions");
-const { CreateRoomAsync, CreatePrivateRoomAsync, FindPreviewGroupsForUserAsync, AssignImgToPrivateChat } = require("../DataBaseFuncs/RoomFunctions");
+const { CreateRoomAsync, CreatePrivateRoomAsync, FindPreviewGroupsForUserAsync, AssignImgToPrivateChat, UploadImgToCloud } = require("../DataBaseFuncs/RoomFunctions");
 const { ResetUnreadMassagesCounterAsync, UpdateUnreadMassagesCounterAsync } = require("../DataBaseFuncs/MassageFunctions");
 const { FindUserFriendsAsync, GetUserInvitationsAsync, CheckFriendshipStatusAsync } = require("../DataBaseFuncs/FriendFunctions");
 
@@ -73,6 +73,8 @@ router.post('/api/home/updateprofile',upload.single('image'), async(req,res)=>{
   if(imgUrl){
     await UpdateUserImgAsync(username, imgUrl);
   }
+  return res.sendStatus(200);
+
 })
 
 router.post("/api/login", async (req, res) => {
