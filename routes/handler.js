@@ -74,7 +74,6 @@ router.post('/api/home/updateprofile',upload.single('image'), async(req,res)=>{
     await UpdateUserImgAsync(username, imgUrl);
   }
   return res.sendStatus(200);
-
 })
 
 router.post("/api/login", async (req, res) => {
@@ -148,8 +147,7 @@ router.post('/api/home/createroom',upload.single('image'), async (req,res)=>{
       }else{
           await CreatePrivateRoomAsync(usernamesArray,groupName);
       }
-
-   return res.sendStatus(200);       
+  return res.sendStatus(200);        
 });
 
 router.post('/api/home/resetUnreadMassagesCounter', async(req,res)=>{
@@ -241,7 +239,7 @@ router.get("/api/findOne", async (req,res) =>{
       username:targetUser.userName,
         massage: "already friends!",
         imgUrl: targetUser.image,
-        desc: targetUser.desc
+        desc: targetUser.status
     })
     return res.status(200);
   }if(friendshipStatus === states.waiting){

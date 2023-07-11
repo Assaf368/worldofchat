@@ -6,27 +6,31 @@ const cloudinary = require('cloudinary').v2;
 
 const _GetPreviewGroupsAsync = async (user) => {
     const previewGroups = await Room.find({ 'members.id': user.id })
-    .select( "_id name img members").lean().then((rooms)=>{
+    .select( "_id name img members description").lean().then((rooms)=>{
         return rooms.map(async (room)=>{
           const member = room.members.find( member=> member.id.toString() === user.id );
           let privateChatTargetName = null;
           let targetUser = null;
           let roomName = null;
-          let img = null;          
+          let img = null;   
+          let desc = null       
           if(room.name === null){//so its a private room
             privateChatTargetName =  room.members.find(member => member.username !== user.userName).username;
             targetUser = await GetUserAsync(privateChatTargetName);
             roomName = targetUser.userName;
             img= targetUser.image;
+            desc = targetUser.status
           }else{
             roomName = room.name;
             img = room.img
+            desc = room.description
           }
           return {
             _id: room._id,
             name: roomName,
             img: img,
-            unreadMassagesCounter: member.unreadMassagesCounter          
+            unreadMassagesCounter: member.unreadMassagesCounter,
+            desc: desc          
           }
         })
       })
