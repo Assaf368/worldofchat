@@ -35,6 +35,7 @@ const ResetUnreadMassagesCounterAsync = async(roomId,userId)=>{
     const massage = new Massage({
       text: text,
       date: time,
+      fullDate: now,
       name: senderUser.userName,
       sender: senderUser.id,
       target: targetRoom

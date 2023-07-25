@@ -21,6 +21,10 @@ const massageSchema = new mongoose.Schema({
         type:String,
         required: true
     },
+    fullDate:{
+        type:Date,
+        required: true
+    },
     target:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Room',
